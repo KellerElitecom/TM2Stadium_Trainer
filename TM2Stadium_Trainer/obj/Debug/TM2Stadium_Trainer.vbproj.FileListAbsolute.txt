@@ -1,0 +1,12 @@
+c:\users\leonard\documents\visual studio 2013\Projects\TM2Stadium_Trainer\TM2Stadium_Trainer\bin\Debug\TM2Stadium_Trainer.exe
+c:\users\leonard\documents\visual studio 2013\Projects\TM2Stadium_Trainer\TM2Stadium_Trainer\bin\Debug\TM2Stadium_Trainer.pdb
+c:\users\leonard\documents\visual studio 2013\Projects\TM2Stadium_Trainer\TM2Stadium_Trainer\bin\Debug\TM2Stadium_Trainer.xml
+c:\users\leonard\documents\visual studio 2013\Projects\TM2Stadium_Trainer\TM2Stadium_Trainer\obj\Debug\TM2Stadium_Trainer.Form1.resources
+c:\users\leonard\documents\visual studio 2013\Projects\TM2Stadium_Trainer\TM2Stadium_Trainer\obj\Debug\TM2Stadium_Trainer.Resources.resources
+c:\users\leonard\documents\visual studio 2013\Projects\TM2Stadium_Trainer\TM2Stadium_Trainer\obj\Debug\TM2Stadium_Trainer.vbproj.GenerateResource.Cache
+c:\users\leonard\documents\visual studio 2013\Projects\TM2Stadium_Trainer\TM2Stadium_Trainer\obj\Debug\TM2Stadium_Trainer.exe
+c:\users\leonard\documents\visual studio 2013\Projects\TM2Stadium_Trainer\TM2Stadium_Trainer\obj\Debug\TM2Stadium_Trainer.xml
+c:\users\leonard\documents\visual studio 2013\Projects\TM2Stadium_Trainer\TM2Stadium_Trainer\obj\Debug\TM2Stadium_Trainer.pdb
+C:\Users\Leonard\Desktop\TM2Stadium_Trainer\TM2Stadium_Trainer\obj\Debug\TM2Stadium_Trainer.exe
+C:\Users\Leonard\Desktop\TM2Stadium_Trainer\TM2Stadium_Trainer\obj\Debug\TM2Stadium_Trainer.xml
+C:\Users\Leonard\Desktop\TM2Stadium_Trainer\TM2Stadium_Trainer\obj\Debug\TM2Stadium_Trainer.pdb
