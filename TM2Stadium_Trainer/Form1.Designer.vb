@@ -27,9 +27,10 @@ Partial Class Form1
         Me.lbl_status = New System.Windows.Forms.Label()
         Me.time_check = New System.Windows.Forms.Timer(Me.components)
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -61,6 +62,7 @@ Partial Class Form1
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.Button3)
         Me.GroupBox2.Controls.Add(Me.Button2)
         Me.GroupBox2.Controls.Add(Me.Button1)
         Me.GroupBox2.Controls.Add(Me.CheckBox1)
@@ -71,15 +73,23 @@ Partial Class Form1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Features"
         '
-        'CheckBox1
+        'Button3
         '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(24, 103)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(92, 17)
-        Me.CheckBox1.TabIndex = 0
-        Me.CheckBox1.Text = "No Gras / Dirt"
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.Button3.Location = New System.Drawing.Point(24, 56)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(129, 26)
+        Me.Button3.TabIndex = 3
+        Me.Button3.Text = "Get Addys"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(24, 88)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(129, 26)
+        Me.Button2.TabIndex = 2
+        Me.Button2.Text = "Inject Code"
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'Button1
         '
@@ -90,14 +100,15 @@ Partial Class Form1
         Me.Button1.Text = "Patch Protection"
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'Button2
+        'CheckBox1
         '
-        Me.Button2.Location = New System.Drawing.Point(24, 51)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(129, 26)
-        Me.Button2.TabIndex = 2
-        Me.Button2.Text = "Inject Code"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(24, 120)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(92, 17)
+        Me.CheckBox1.TabIndex = 0
+        Me.CheckBox1.Text = "No Gras / Dirt"
+        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -126,5 +137,6 @@ Partial Class Form1
     Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents Button3 As System.Windows.Forms.Button
 
 End Class
