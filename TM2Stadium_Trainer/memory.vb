@@ -226,19 +226,6 @@ Module memory
                     Else
                         Address = New IntPtr(Address.ToInt64)
                     End If
-                    'If Not Offsets(0) = "none" Then
-                    '    For i As Integer = 0 To Offsets.Length - 1
-                    '        ReadProcessMemory(running(0).Handle, Address, tmp, IntPtr.Size, 0)
-                    '        If IntPtr.Size = 4 Then
-                    '            Dim i32 As Int32 = Int(Offsets(i))
-                    '            Address = BitConverter.ToInt32(tmp, 0) + i32
-                    '        Else
-                    '            Dim i64 As Int64 = Int(Offsets(i))
-                    '            Address = BitConverter.ToInt64(tmp, 0) + i64
-                    '        End If
-                    '    Next
-                    'End If
-
 
                     Return Address
                 End If
