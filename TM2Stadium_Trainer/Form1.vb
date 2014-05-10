@@ -1,8 +1,13 @@
 ﻿Public Class Form1
-    Dim maniaplanetbase As Integer
-    Dim maniaplanetsize As Integer
-    Dim injectionaddress As Integer
-    Dim dirtoriginaddress As Integer
+    'Dim maniaplanetbase As Integer
+    'Dim maniaplanetsize As Integer
+    'Dim injectionaddress As Integer
+    'Dim dirtoriginaddress As Integer
+    'Dim E9 As Byte() = {&HE9}
+    'Dim DreiNOP As Byte() = {&H90, &H90, &H90}
+    'Dim dirtbackupbytes As Byte()
+
+
 
     Private Sub time_check_Tick(sender As Object, e As EventArgs) Handles time_check.Tick
         If UpdateProcessHandle() Then
@@ -21,41 +26,43 @@
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
 
-        maniaplanetbase = GetModuleInfo("maniaplanet.exe", False)
-        maniaplanetsize = GetModuleInfo("maniaplanet.exe", True)
+        addys.maniaplanetbase = GetModuleInfo("maniaplanet.exe", False)
+        addys.maniaplanetsize = GetModuleInfo("maniaplanet.exe", True)
         ' \x66\x8B\x47\x0C\x66\x89\x46\x78\x8B\x47", "xxx?xxx?xx");
         Dim dirtpattern As Byte() = {&H66, &H8B, &H47, &HC, &H66, &H89, &H46, &H78, &H8B, &H47}
         Dim dirtmask As String = "xxx?xxx?xx"
-        Dim granddump As Byte() = ReadMemory(Of Byte())(maniaplanetbase, maniaplanetsize, False)
+        Dim granddump As Byte() = ReadMemory(Of Byte())(addys.maniaplanetbase, addys.maniaplanetsize, False)
 
 
         Dim dirtasm As Integer = patternscan(0, dirtpattern, dirtmask, granddump)
-        dirtoriginaddress = dirtasm + maniaplanetbase
+        addys.dirtoriginaddress = dirtasm + addys.maniaplanetbase
 
 
         
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        injectionaddress = maniaplanetbase + &H310
+        ' injection.injectionstart = maniaplanetbase + &H310
+        addys.injectionaddress = addys.maniaplanetbase + &H310
+        Dim backupbytes As Byte() = ReadMemory(Of Byte())(addys.dirtoriginaddress, 8, False)
+
         Dim injection As Byte() = {&H66, &H8B, &H47, &HC, &H66, &H3D, &H2, &H0, &HF, &H84, &HA, &H0, &H0, &H0, &H66, &H3D, &H6, &H0, &HF, &H85, &H4, &H0, &H0, &H0, &H66, &HB8, &HA, &H0, &H66, &H89, &H46, &H78}
-        Dim detouraddy As Byte() = BitConverter.GetBytes(injectionaddress - 5 - dirtoriginaddress)
-        Dim E9 As Byte() = {&HE9}
-        Dim DreiNOP As Byte() = {&H90, &H90, &H90}
+        Dim detouraddy As Byte() = BitConverter.GetBytes(addys.injectionaddress - 5 - addys.dirtoriginaddress)
+        
         ' Array.Copy(detouraddy, 0, dirtdetour, 1, detouraddy.Length)
 
         '   Dim jumptopatch As Byte() = dirtdetour
         '    Dim test As Integer = (dirtoriginaddress + 8) - injectionaddress - injection.Count - jumptopatch.Count - DreiNOP.Count - dirtdetour.Count
-        Dim calculateoriginaddy As Byte() = BitConverter.GetBytes((dirtoriginaddress + 8) - injectionaddress - injection.Count - E9.Count - DreiNOP.Count - 1)
+        Dim calculateoriginaddy As Byte() = BitConverter.GetBytes((addys.dirtoriginaddress + 8) - addys.injectionaddress - injection.Count - addys.E9.Count - addys.DreiNOP.Count - 1)
 
 
-        WriteMemory(injectionaddress, injection)
-        WriteMemory(injectionaddress + injection.Count, E9)
-        WriteMemory(injectionaddress + injection.Count + E9.Count, calculateoriginaddy)
+        WriteMemory(addys.injectionaddress, injection)
+        WriteMemory(addys.injectionaddress + injection.Count, addys.E9)
+        WriteMemory(addys.injectionaddress + injection.Count + addys.E9.Count, calculateoriginaddy)
 
-        WriteMemory(dirtoriginaddress, E9)
-        WriteMemory(dirtoriginaddress + E9.Count, detouraddy)
-        WriteMemory(dirtoriginaddress + E9.Count + detouraddy.Count, DreiNOP)
+        WriteMemory(addys.dirtoriginaddress, addys.E9)
+        WriteMemory(addys.dirtoriginaddress + addys.E9.Count, detouraddy)
+        WriteMemory(addys.dirtoriginaddress + addys.E9.Count + detouraddy.Count, addys.DreiNOP)
 
     End Sub
 
@@ -89,4 +96,47 @@
         Return 0
 
     End Function
+
+    Private Sub chk_grasdirt_CheckedChanged(sender As Object, e As EventArgs) Handles chk_grasdirt.CheckedChanged
+        If chk_grasdirt.Checked Then
+            RemoveProtection(&H400310, 100)
+            addys.maniaplanetbase = GetModuleInfo("maniaplanet.exe", False)
+            addys.maniaplanetsize = GetModuleInfo("maniaplanet.exe", True)
+            ' \x66\x8B\x47\x0C\x66\x89\x46\x78\x8B\x47", "xxx?xxx?xx");
+            Dim dirtpattern As Byte() = {&H66, &H8B, &H47, &HC, &H66, &H89, &H46, &H78, &H8B, &H47}
+            Dim dirtmask As String = "xxx?xxx?xx"
+            Dim granddump As Byte() = ReadMemory(Of Byte())(addys.maniaplanetbase, addys.maniaplanetsize, False)
+
+
+            Dim dirtasm As Integer = patternscan(0, dirtpattern, dirtmask, granddump)
+            addys.dirtbackupbytes = ReadMemory(Of Byte())(addys.dirtoriginaddress, 8, False)
+            addys.dirtoriginaddress = dirtasm + addys.maniaplanetbase
+
+            addys.injectionaddress = addys.maniaplanetbase + &H310
+
+
+            Dim injection As Byte() = {&H66, &H8B, &H47, &HC, &H66, &H3D, &H2, &H0, &HF, &H84, &HA, &H0, &H0, &H0, &H66, &H3D, &H6, &H0, &HF, &H85, &H4, &H0, &H0, &H0, &H66, &HB8, &HA, &H0, &H66, &H89, &H46, &H78}
+            Dim detouraddy As Byte() = BitConverter.GetBytes(addys.injectionaddress - 5 - addys.dirtoriginaddress)
+
+            ' Array.Copy(detouraddy, 0, dirtdetour, 1, detouraddy.Length)
+
+            '   Dim jumptopatch As Byte() = dirtdetour
+            '    Dim test As Integer = (dirtoriginaddress + 8) - injectionaddress - injection.Count - jumptopatch.Count - DreiNOP.Count - dirtdetour.Count
+            Dim calculateoriginaddy As Byte() = BitConverter.GetBytes((addys.dirtoriginaddress + 8) - addys.injectionaddress - injection.Count - addys.E9.Count - addys.DreiNOP.Count - 1)
+
+
+            WriteMemory(addys.injectionaddress, injection)
+            WriteMemory(addys.injectionaddress + injection.Count, addys.E9)
+            WriteMemory(addys.injectionaddress + injection.Count + addys.E9.Count, calculateoriginaddy)
+
+            WriteMemory(addys.dirtoriginaddress, addys.E9)
+            WriteMemory(addys.dirtoriginaddress + addys.E9.Count, detouraddy)
+            WriteMemory(addys.dirtoriginaddress + addys.E9.Count + detouraddy.Count, addys.DreiNOP)
+
+        Else
+            If UpdateProcessHandle() Then
+                WriteMemory(addys.dirtoriginaddress, addys.dirtbackupbytes)
+            End If
+        End If
+    End Sub
 End Class
