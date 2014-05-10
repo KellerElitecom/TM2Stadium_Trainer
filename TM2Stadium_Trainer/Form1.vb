@@ -46,7 +46,7 @@
 
         '   Dim jumptopatch As Byte() = dirtdetour
         '    Dim test As Integer = (dirtoriginaddress + 8) - injectionaddress - injection.Count - jumptopatch.Count - DreiNOP.Count - dirtdetour.Count
-        Dim calculateoriginaddy As Byte() = BitConverter.GetBytes((dirtoriginaddress + 8) - injectionaddress - injection.Count - E9.Count - DreiNOP.Count - E9.Count)
+        Dim calculateoriginaddy As Byte() = BitConverter.GetBytes((dirtoriginaddress + 8) - injectionaddress - injection.Count - E9.Count - DreiNOP.Count - 1)
 
 
         WriteMemory(injectionaddress, injection)
